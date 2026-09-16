@@ -1,4 +1,5 @@
 import App from "../App";
+import Login from "../auth/login";
 import Dashboard from "../pages/Dashboard";
 
 const routes = [
@@ -11,6 +12,10 @@ const routes = [
             {
                 path: "/", 
                 element: <Dashboard />,
+            },
+            {
+                path: "/admin_login",
+                element: <Login />
             }
         ]
      
