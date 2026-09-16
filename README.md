@@ -1,16 +1,49 @@
-# React + Vite
+# 🧶 Stitches by Mona – Admin Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the **admin side** of the Stitches by Mona website.  
+It provides tools to manage the crochet and knitting business website, including product listings, content updates, and customer interactions.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
+- Secure admin login
+- Dashboard to manage products (add, edit, delete)
+- Content management for pages and blog posts
+- Planned chatbot management (configure responses, monitor usage)
+- Future analytics and order tracking
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠 Tech Stack
+- **React** – frontend framework
+- **Vite** – fast development build tool
+- **CSS** – styling
+- **ESLint** – code linting
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Getting Started
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/monalisasabina/Stitches-By-Mona-Frontend-admin.git
+cd Stitches-By-Mona-Frontend-admin
+npm install
+npm run dev
+```
+
+Open your browser at http://localhost:5173 to view the admin dashboard.
+
+---
+
+## 🎯 Purpose
+This admin dashboard is designed to:
+
+Give Monalisa full control over the website content
+
+Simplify product and page management
+
+Provide a learning platform for integrating chatbot features into a React app
+
+## 📬 Contact
+For inquiries or collaborations, reach out via Instagram: Stitches by Monalisa Sabina
