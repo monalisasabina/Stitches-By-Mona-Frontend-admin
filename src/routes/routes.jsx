@@ -1,24 +1,31 @@
 import App from "../App";
 import Login from "../auth/login";
 import Dashboard from "../pages/Dashboard";
+import ProtectedRoute from "./ProtectedRoute";
 
 const routes = [
 
+    
     {
-        path: "/",
-        element: <App />,
+        path: "/admin_login",
+        element: <Login />
+    },
+
+    {
+        element: <ProtectedRoute/>,
         children: [
 
             {
                 path: "/", 
-                element: <Dashboard />,
+                element: <App />,
+                children: [
+                    {
+                        index: true,
+                        element: <Dashboard />
+                    }
+                ]
             },
-            {
-                path: "/admin_login",
-                element: <Login />
-            }
         ]
-     
     
     }
 ]

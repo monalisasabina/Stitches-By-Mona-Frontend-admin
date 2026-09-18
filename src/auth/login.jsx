@@ -31,7 +31,7 @@ function Login() {
         );
 
         const data = await response.json(); 
-        console.log(data)
+        // console.log(data)
         
         if (!response.ok) {
              setError(data.message || "Invalid username/email or password.");
@@ -39,7 +39,11 @@ function Login() {
          } 
          
          // Save JWT 
-         localStorage.setItem("access_token", data.access_token); 
+         localStorage.setItem("access-token", data.token); 
+         console.log("login successful, token:", data.token);
+
+
+         console.log("about to navigate to dashboard")
          
          // Go to dashboard 
          navigate("/"); 
