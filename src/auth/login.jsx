@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+// react icons
+import { FaRegEyeSlash } from "react-icons/fa6";
+import { FaRegEye } from "react-icons/fa6";
+
 function Login() {
 
     const [identifier, setIdentifier] = useState(""); 
     const [password, setPassword] = useState(""); 
     const [error, setError] = useState(""); 
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);    
 
     const navigate = useNavigate();
 
@@ -82,13 +87,24 @@ function Login() {
                     </div>
 
                     {/* PASSWORD */}
-                    <div> 
+                    <div className="login-form-password"> 
                         
-                        <input type="password" 
+                        <input type={showPassword ? "text" : "password"} 
                                id="password" 
                                value={password} 
                                onChange={(e) => setPassword(e.target.value)} 
-                               placeholder="Enter password" required /> 
+                               placeholder="Enter password" 
+                               required 
+                        /> 
+
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                        >
+                            {showPassword ? <FaRegEyeSlash /> : <FaRegEye /> }
+
+                        </button>
+
                     </div> 
 
                     {/* ERROR MESSAGE */}
