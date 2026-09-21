@@ -5,7 +5,7 @@ function ProtectedRoute(){
     // Login will store the token after successful authentication
     const token =localStorage.getItem("access-token");
 
-    console.log("ProtectedRoute token:", token);
+    // console.log("ProtectedRoute token:", token);
 
     if (!token) {
         return <Navigate to="/admin_login" replace/>;

@@ -1,5 +1,6 @@
 import App from "../App";
 import Login from "../auth/login";
+import AdminSettings from "../pages/AdminSettings";
 import Dashboard from "../pages/Dashboard";
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -22,6 +23,10 @@ const routes = [
                     {
                         index: true,
                         element: <Dashboard />
+                    },
+                    {
+                        path: "admin_settings",
+                        element: <AdminSettings/>
                     }
                 ]
             },

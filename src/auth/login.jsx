@@ -45,7 +45,7 @@ function Login() {
          
          // Save JWT 
          localStorage.setItem("access-token", data.token); 
-         console.log("login successful, token:", data.token);
+        //  console.log("login successful, token:", data.token);
 
 
          console.log("about to navigate to dashboard")
@@ -74,8 +74,7 @@ function Login() {
 
                     {/* EMAIL-USERNAME */}
                     <div className="login-form-email-username">
-                        <label htmlFor="email-username"></label>
-
+                        
                         <input type="text"
                                id="email-username"
                                placeholder="Email or Username"

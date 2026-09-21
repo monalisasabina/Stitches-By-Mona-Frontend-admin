@@ -42,6 +42,7 @@ function NavBar(){
             <div className="navbar_links">
 
                 <NavLink to="/">Dashboard</NavLink>
+                <NavLink to="/admin_settings">Admin Settings</NavLink>
                 <button onClick={handleLogout}>Logout</button>
                 
             </div>
