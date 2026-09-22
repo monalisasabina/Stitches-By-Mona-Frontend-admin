@@ -1,6 +1,6 @@
 // Where the admins can change their credentials
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // react icons
 import { FaRegEyeSlash } from "react-icons/fa6";
@@ -25,6 +25,9 @@ function AdminSettings(){
     const [newPassword, setNewPassword] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
+    // State error
+    const [error, setError] = useState()
+
     // Handle Details Form Submission
     const handleDetailsSubmit = async (e) =>{
 
@@ -34,6 +37,49 @@ function AdminSettings(){
         console.log(lastName);
         console.log(userName);
         console.log(email);
+        
+        // Accessing token
+        const token = localStorage.getItem("access-token");
+        console.log(token)
+
+        const id = localStorage.getItem("admin-id");
+        console.log(id)
+
+        const body = {};
+        if (firstName) body.firstname = firstName;
+        if (lastName) body.lastname = lastName;
+        if (userName) body.username = userName;
+        if (email) body.email = email;
+
+        console.log(body)
+
+
+        // Patching data
+        try { const response = await fetch( 
+                `${import.meta.env.VITE_STITCHES_API_URL}/auth/admin/update/${id}`, {
+
+                     method: "PATCH", 
+                     headers: { 
+                            "Content-Type": "application/json", 
+                            "Authorization": `Bearer ${token}`
+                         }, 
+                     body: JSON.stringify(body), 
+                 }
+        
+            );
+
+            const data = await response.json(); 
+            console.log(data)
+            
+            if (!response.ok) {
+                setError(data.message || "Invalid firstname, lastname, username or email.");
+                return;
+            } 
+
+            console.log("Admin details updated successfully")
+           
+
+        }catch(error){setError("Unable to connect to the server.")}
 
     };
 
@@ -85,7 +131,7 @@ function AdminSettings(){
                         />
 
                         {/* USERNAME */}
-                        <label htmlFor="userName">Last Name:</label>
+                        <label htmlFor="userName">Username:</label>
                         <input 
                             type="text" 
                             id="userName" 

@@ -46,6 +46,9 @@ function Login() {
          // Save JWT 
          localStorage.setItem("access-token", data.token); 
         //  console.log("login successful, token:", data.token);
+        localStorage.setItem("admin-id", data.admin.id);
+        console.log("login successful, admin id:", data.admin.id);
+         
 
 
          console.log("about to navigate to dashboard")

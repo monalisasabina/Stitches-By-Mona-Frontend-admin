@@ -1,6 +1,6 @@
 import App from "../App";
 import Login from "../auth/login";
-import AdminSettings from "../pages/AdminSettings";
+import AdminSettings from "../auth/AdminSettings";
 import Dashboard from "../pages/Dashboard";
 import ProtectedRoute from "./ProtectedRoute";
 
