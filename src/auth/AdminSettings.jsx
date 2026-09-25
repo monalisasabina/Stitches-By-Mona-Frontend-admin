@@ -92,6 +92,34 @@ function AdminSettings(){
         console.log(newPassword)
         console.log(confirmNewPassword)
 
+        const token = localStorage.getItem("access-token");
+        const id = localStorage.getItem("admin-id");
+
+        try{
+            const response = await fetch(
+                `${import.meta.env.VITE_STITCHES_API_URL}/auth/admin/update/${id}`,{
+                    method: "PATCH"
+                    headers: {
+                         "Content-Type": "application/json",
+                         "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                          old_password: oldPassword,
+                          new_password: newPassword,
+                          confirm_new_password: confirmNewPassword
+                    })
+                }
+             );
+
+             const data = await response.json();
+             if (!response.ok) {
+                setError(data.error || "Password update failed");
+             };
+
+             console.log("Password updated successfully")
+        } catch(error){
+                setError("Unable to connect to the server")
+        };
     };
 
 
@@ -102,7 +130,6 @@ function AdminSettings(){
             
             <div>
             
-
                     {/* ADMIN CREDENTIALS */}
                     <form className="admin-details-form" onSubmit={handleDetailsSubmit}>
 
@@ -156,7 +183,7 @@ function AdminSettings(){
                     </form>
                   
 
-                    {/* PASSWORD */}
+                    {/* PASSWORD CHANGE */}
                     <form className="admin-password-container" onSubmit={handlePasswordSubmit}>
 
                         <h3>Change Password</h3>
