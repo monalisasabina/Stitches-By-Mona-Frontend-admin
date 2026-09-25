@@ -1,6 +1,6 @@
 // Where the admins can change their credentials
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // react icons
 import { FaRegEyeSlash } from "react-icons/fa6";
@@ -19,39 +19,44 @@ function AdminSettings(){
     const [email, setEmail] = useState("");
     const [userName, setUserName] = useState("");
     
-    
     // State password form
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
     // State error
-    const [error, setError] = useState()
+    const [detailsError, setDetailsError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+
+    // state success
+    const [detailsSuccess, setDetailsSuccess] = useState("");
+    const [passwordSuccess, setPasswordSuccess] = useState("");
 
     // Handle Details Form Submission
     const handleDetailsSubmit = async (e) =>{
 
         e.preventDefault();
 
-        console.log(firstName);
-        console.log(lastName);
-        console.log(userName);
-        console.log(email);
+        // console.log(firstName);
+        // console.log(lastName);
+        // console.log(userName);
+        // console.log(email);
         
         // Accessing token
         const token = localStorage.getItem("access-token");
-        console.log(token)
+        // console.log(token)
 
         const id = localStorage.getItem("admin-id");
-        console.log(id)
+        // console.log(id)
 
+        // Build the request body
         const body = {};
         if (firstName) body.firstname = firstName;
         if (lastName) body.lastname = lastName;
         if (userName) body.username = userName;
         if (email) body.email = email;
 
-        console.log(body)
+        // console.log(body)
 
 
         // Patching data
@@ -72,33 +77,42 @@ function AdminSettings(){
             console.log(data)
             
             if (!response.ok) {
-                setError(data.message || "Invalid firstname, lastname, username or email.");
+                setDetailsError(data.error || "Invalid firstname, lastname, username or email.");
                 return;
             } 
 
             console.log("Admin details updated successfully")
-           
+            setDetailsSuccess("Admin details updated successfully.");
 
-        }catch(error){setError("Unable to connect to the server.")}
+        }catch(error){setDetailsError("Unable to connect to the server.")}
 
     };
 
     // Handle Password Form Submission
     const handlePasswordSubmit = async (e) =>{
-
+          
         e.preventDefault();
+
+        // Clear previous error message
+        setPasswordError(""); 
 
         console.log(oldPassword)
         console.log(newPassword)
         console.log(confirmNewPassword)
 
         const token = localStorage.getItem("access-token");
-        const id = localStorage.getItem("admin-id");
+        // console.log(token)
+
+        // Check if new password and confirm new password match
+        if (newPassword !== confirmNewPassword) {
+            setPasswordError("New password and confirm new password do not match.");
+            return;
+        }
 
         try{
             const response = await fetch(
-                `${import.meta.env.VITE_STITCHES_API_URL}/auth/admin/update/${id}`,{
-                    method: "PATCH"
+                `${import.meta.env.VITE_STITCHES_API_URL}/auth/admin/change-password`,{
+                    method: "PATCH",
                     headers: {
                          "Content-Type": "application/json",
                          "Authorization": `Bearer ${token}`
@@ -106,19 +120,29 @@ function AdminSettings(){
                     body: JSON.stringify({
                           old_password: oldPassword,
                           new_password: newPassword,
-                          confirm_new_password: confirmNewPassword
+        
                     })
-                }
-             );
+                }    
+            );
 
              const data = await response.json();
+             console.log(data)
+             console.log(data.error)
+
+
              if (!response.ok) {
-                setError(data.error || "Password update failed");
+                setPasswordError(data.error || "Password update failed");
+                return;
              };
 
              console.log("Password updated successfully")
+             setPasswordSuccess("Password updated successfully.");
+             setOldPassword("");
+             setNewPassword("");
+             setConfirmNewPassword("");
+
         } catch(error){
-                setError("Unable to connect to the server")
+                setPasswordError("Unable to connect to the server")
         };
     };
 
@@ -176,6 +200,12 @@ function AdminSettings(){
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
+
+                        {/* ERROR MESSAGE */}
+                        {detailsError && <p className="detail-error-msg">{detailsError}</p>}
+
+                        {/* SUCCESS MESSAGE */}
+                        {detailsSuccess && <p className="detail-success-msg">{detailsSuccess}</p>}
 
                         {/* SUBMIT BUTTON */}
                         <button type="submit">Update Details</button>
@@ -255,9 +285,14 @@ function AdminSettings(){
                             
                             </button>
                         </div>
-                       
 
-                         {/* SUBMIT PASSWORD BUTTON */}
+                        {/* ERROR MESSAGE */}
+                        {passwordError && <p className="confirm-error-msg">{passwordError}</p>}
+
+                        {/* SUCCESS MESSAGE */}
+                        {passwordSuccess && <p className="confirm-success-msg">{passwordSuccess}</p>}
+
+                         {/* SUBMIT CHANGE PASSWORD BUTTON */}
                         <button type="submit">Change Password</button>
 
                     </form>
