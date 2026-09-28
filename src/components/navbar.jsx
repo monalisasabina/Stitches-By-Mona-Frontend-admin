@@ -31,7 +31,7 @@ function NavBar(){
           }
 
           localStorage.removeItem('access-token');
-          localStorage.removeItem('user');
+          localStorage.removeItem('admin-id');
           navigate("/admin_login")
      };
 

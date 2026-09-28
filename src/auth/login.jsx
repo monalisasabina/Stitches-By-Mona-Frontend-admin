@@ -39,7 +39,7 @@ function Login() {
         // console.log(data)
         
         if (!response.ok) {
-             setError(data.message || "Invalid username/email or password.");
+             setError(data.error || "Invalid username/email or password.");
               return;
          } 
          
@@ -51,7 +51,7 @@ function Login() {
          
 
 
-         console.log("about to navigate to dashboard")
+        console.log("about to navigate to dashboard")
          
          // Go to dashboard 
          navigate("/"); 
