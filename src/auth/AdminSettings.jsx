@@ -46,7 +46,7 @@ function AdminSettings(){
         const token = localStorage.getItem("access-token");
         // console.log(token)
 
-        const id = localStorage.getItem("admin-id");
+        // const id = localStorage.getItem("admin-id");
         // console.log(id)
 
         // Build the request body
@@ -61,7 +61,7 @@ function AdminSettings(){
 
         // Patching data
         try { const response = await fetch( 
-                `${import.meta.env.VITE_STITCHES_API_URL}/auth/admin/update/${id}`, {
+                `${import.meta.env.VITE_STITCHES_API_URL}/auth/admin/update`, {
 
                      method: "PATCH", 
                      headers: { 
@@ -96,9 +96,9 @@ function AdminSettings(){
         // Clear previous error message
         setPasswordError(""); 
 
-        console.log(oldPassword)
-        console.log(newPassword)
-        console.log(confirmNewPassword)
+        // console.log(oldPassword)
+        // console.log(newPassword)
+        // console.log(confirmNewPassword)
 
         const token = localStorage.getItem("access-token");
         // console.log(token)

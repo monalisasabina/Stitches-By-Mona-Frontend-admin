@@ -3,6 +3,7 @@ import Login from "../auth/login";
 import AdminSettings from "../auth/AdminSettings";
 import Dashboard from "../pages/Dashboard";
 import ProtectedRoute from "./ProtectedRoute";
+import RegisterNewAdmin from "../auth/RegisterNewAdmin";
 
 const routes = [
 
@@ -27,7 +28,12 @@ const routes = [
                     {
                         path: "admin_settings",
                         element: <AdminSettings/>
+                    },
+                    {
+                        path: "register_new_admin",
+                        element: <RegisterNewAdmin/>
                     }
+
                 ]
             },
         ]
