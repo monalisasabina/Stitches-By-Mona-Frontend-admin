@@ -6,19 +6,17 @@ import { FaRegEye } from "react-icons/fa6";
 
 function RegisterNewAdmin(){
 
-    // State admin details form
+    // State: admin details form
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [userName, setUserName] = useState("");
 
-
-    // Passwords
-    // Password availability
+    // State: Password availability
      const [showPassword, setShowPassword] = useState(false);
      const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-    // State password form
+    // State: password form
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -204,6 +202,7 @@ function RegisterNewAdmin(){
 
                             <h3>New Administrator</h3>
 
+                            <p>ID No: {newAdmin.id} </p>
                             <p>First Name: {newAdmin.firstname}</p>
                             <p>Last Name: {newAdmin.lastname}</p>
                             <p>User Name: {newAdmin.username}</p>

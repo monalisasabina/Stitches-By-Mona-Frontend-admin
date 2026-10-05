@@ -4,6 +4,7 @@ import AdminSettings from "../auth/AdminSettings";
 import Dashboard from "../pages/Dashboard";
 import ProtectedRoute from "./ProtectedRoute";
 import RegisterNewAdmin from "../auth/RegisterNewAdmin";
+import AdminList from "../pages/adminList";
 
 const routes = [
 
@@ -32,6 +33,10 @@ const routes = [
                     {
                         path: "register_new_admin",
                         element: <RegisterNewAdmin/>
+                    },
+                    {
+                        path: "admin_list",
+                        element: <AdminList/>
                     }
 
                 ]

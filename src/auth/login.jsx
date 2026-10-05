@@ -47,15 +47,13 @@ function Login() {
          localStorage.setItem("access-token", data.token); 
          //  console.log("login successful, token:", data.token);
          localStorage.setItem("admin-id", data.admin.id);
-         console.log("login successful, admin id:", data.admin.id);
+        //  console.log("login successful, admin id:", data.admin.id);
          
-
-
         console.log("about to navigate to dashboard")
          
          // Go to dashboard 
          navigate("/"); 
-        } catch (error) {setError("Unable to connect to the server.");
+        } catch (error) {setError("Unable to connect to the server.",error);
 
         } finally { setLoading(false); } 
     };
