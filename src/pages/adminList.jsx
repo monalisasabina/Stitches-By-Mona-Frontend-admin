@@ -13,7 +13,8 @@ function AdminList(){
 
             try{
 
-                const token = localStorage.getItem("access_token")
+                const token = localStorage.getItem("access-token")
+                // console.log(token)
 
                 const response = await fetch (
                     `${import.meta.env.VITE_STITCHES_API_URL}/auth/admin/profiles`,
@@ -28,12 +29,16 @@ function AdminList(){
                 const data = await response.json();
                 console.log(data)
                 setAdmins(data)
+               
+               
 
                 if (!response.ok){
                     setErrors("Failed to fetch admins", data.error)
-                } 
-                
+                } else {
+                    setErrors("")
+                }
 
+                
             }catch(error){
                 setErrors(error.message)
             }
@@ -64,18 +69,19 @@ function AdminList(){
                 </thead>
                 
                 {/* TABLE BODY */}
-                {/* <tbody>
+                <tbody>
                     {admins.map((admin) =>(
                         <tr key={admin.id}>
                             <td>{admin.id}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{admin.firstname}</td>
+                            <td>{admin.lastname}</td>
+                            <td>{admin.username}</td>
+                            <td>{admin.email}</td>
                         </tr>
                      )
                     )}
                     
-                </tbody> */}
+                </tbody> 
             </table>
   
         </div>
