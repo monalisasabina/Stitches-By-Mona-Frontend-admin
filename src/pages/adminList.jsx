@@ -48,6 +48,58 @@ function AdminList(){
     }, []);
 
 
+     
+    const changeAdminStatus = async (admin) => {
+
+        // Clear any previous error message
+        setErrors("");
+
+        try {
+            // Get the logged-in admin's JWT
+            const token = localStorage.getItem("access-token");
+
+            // Send a request to the Flask backend
+            const response = await fetch(
+                `${import.meta.env.VITE_STITCHES_API_URL}/auth/admin/profiles/${admin.id}/status`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    },
+
+                    // Reverse the current status
+                    body: JSON.stringify({
+                        is_active: !admin.is_active
+                    })
+                }
+            );
+
+            // Read the backend response
+            const data = await response.json();
+
+            // Display an error if the request failed
+            if (!response.ok) {
+                setErrors(data.error || "Failed to update admin status");
+                return;
+            }
+
+            // Update the affected admin in React state
+            setAdmins((previousAdmins) =>
+                previousAdmins.map((item) =>
+                    item.id === admin.id
+                        ? { ...item, is_active: data.admin.is_active }
+                        : item
+                )
+            );
+
+        } catch (error) {
+            // Handle network errors
+            setErrors(error.message);
+        }
+    };
+
+
     return(
         <div>
             <h1>ADMIN LIST</h1>
@@ -65,6 +117,9 @@ function AdminList(){
                         <th>Last Name</th>
                         <th>User Name</th>
                         <th>Email</th>
+                        <th>Phone</th>
+                        <th>Active</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 
@@ -77,6 +132,18 @@ function AdminList(){
                             <td>{admin.lastname}</td>
                             <td>{admin.username}</td>
                             <td>{admin.email}</td>
+                            <td>{admin.phone}</td>
+                            <td>{admin.is_active ? "Active" : "Inactive"}</td>
+
+                            {/* Changing activation status button */}
+                            <td>
+                                <button
+                                    type="button"
+                                    onClick={() => changeAdminStatus(admin)}
+                                >
+                                    {admin.is_active ? "Deactivate" : "Activate"}
+                                </button>
+                            </td>
                         </tr>
                      )
                     )}

@@ -18,6 +18,7 @@ function AdminSettings(){
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [userName, setUserName] = useState("");
+    const [phone, setPhone] = useState("");
     
     // State password form
     const [oldPassword, setOldPassword] = useState("");
@@ -55,6 +56,7 @@ function AdminSettings(){
         if (lastName) body.lastname = lastName;
         if (userName) body.username = userName;
         if (email) body.email = email;
+        if (phone) body.phone = phone;
 
         // console.log(body)
 
@@ -77,14 +79,14 @@ function AdminSettings(){
             console.log(data)
             
             if (!response.ok) {
-                setDetailsError(data.error || "Invalid firstname, lastname, username or email.");
+                setDetailsError(data.error || "Invalid firstname, lastname, username, email or phone.");
                 return;
             } 
 
             console.log("Admin details updated successfully")
             setDetailsSuccess("Admin details updated successfully.");
 
-        }catch(error){setDetailsError("Unable to connect to the server.")}
+        }catch(error){setDetailsError("Unable to connect to the server.", error)}
 
     };
 
@@ -142,7 +144,7 @@ function AdminSettings(){
              setConfirmNewPassword("");
 
         } catch(error){
-                setPasswordError("Unable to connect to the server")
+                setPasswordError("Unable to connect to the server", error)
         };
     };
 
@@ -189,6 +191,26 @@ function AdminSettings(){
                             name="userName"
                             value={userName}
                             onChange={(e) => setUserName(e.target.value)}
+                        />
+
+                               {/* EMAIL */}
+                        <label htmlFor="email">Email:</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+
+                        {/* PHONE */}
+                        <label htmlFor="phone">Mobile Number:</label>
+                        <input 
+                            type="tel" 
+                            id="phone" 
+                            name="phone" 
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
                         />
 
                         {/* EMAIL */}

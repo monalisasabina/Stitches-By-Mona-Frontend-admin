@@ -10,6 +10,7 @@ function RegisterNewAdmin(){
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
     const [userName, setUserName] = useState("");
 
     // State: Password availability
@@ -32,7 +33,16 @@ function RegisterNewAdmin(){
 
         e.preventDefault();
 
+        setErrorMsg("");
+        setSuccessMsg("");
+        setNewAdmin(null);
+
         const token = localStorage.getItem("access-token")
+
+        if (!token) {
+            setErrorMsg("Please log in before registering a new admin.");
+            return;
+        }
 
         if (password !== confirmPassword) {
             setErrorMsg("New password and confirm new password do not match.");
@@ -53,6 +63,7 @@ function RegisterNewAdmin(){
                                 lastname: lastName,
                                 username: userName,
                                 email: email,
+                                phone: phone,
                                 password: password, 
 
                             }), 
@@ -76,6 +87,7 @@ function RegisterNewAdmin(){
                 setLastName("");
                 setUserName("");
                 setEmail("");
+                setPhone("");
                 setPassword("");
                 setConfirmPassword("");
 
@@ -83,6 +95,9 @@ function RegisterNewAdmin(){
             } catch(error){setErrorMsg("Unable to connect to the server",error)}
 
     };
+ 
+  
+
 
 
     return(
@@ -105,6 +120,7 @@ function RegisterNewAdmin(){
                         name="firstName" 
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
+                        required
                     />
 
                     {/* LAST NAME */}
@@ -115,6 +131,7 @@ function RegisterNewAdmin(){
                         name="lastName" 
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
+                        required
                     />
 
                     {/* USERNAME */}
@@ -125,6 +142,7 @@ function RegisterNewAdmin(){
                         name="username" 
                         value={userName}
                         onChange={(e) => setUserName(e.target.value)}
+                        required
                     />
                     
                     {/* EMAIL */}
@@ -135,6 +153,18 @@ function RegisterNewAdmin(){
                         name="email" 
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+
+                      {/* PHONE */}
+                    <label htmlFor="phone">Mobile Number:</label>
+                    <input 
+                        type="tel" 
+                        id="phone" 
+                        name="phone" 
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        required
                     />
  
                     {/* PASSWORD */}
@@ -207,6 +237,7 @@ function RegisterNewAdmin(){
                             <p>Last Name: {newAdmin.lastname}</p>
                             <p>User Name: {newAdmin.username}</p>
                             <p>Email: {newAdmin.email}</p>
+                            <p>Mobile Number: {newAdmin.phone}</p>
 
 
                         </div>
