@@ -5,6 +5,7 @@ import Dashboard from "../pages/Dashboard";
 import ProtectedRoute from "./ProtectedRoute";
 import RegisterNewAdmin from "../auth/RegisterNewAdmin";
 import AdminList from "../pages/adminList";
+import ForgetPassword from "../auth/ForgetPassword";
 
 const routes = [
 
@@ -12,6 +13,10 @@ const routes = [
     {
         path: "/admin_login",
         element: <Login />
+    },
+    {
+        path: "forgot_password",
+        element: <ForgetPassword />
     },
 
     {
@@ -37,8 +42,8 @@ const routes = [
                     {
                         path: "admin_list",
                         element: <AdminList/>
-                    }
-
+                    },
+                   
                 ]
             },
         ]

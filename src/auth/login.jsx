@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // react icons
 import { FaRegEyeSlash } from "react-icons/fa6";
@@ -97,6 +97,7 @@ function Login() {
                                required 
                         /> 
 
+
                         <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
@@ -104,6 +105,9 @@ function Login() {
                             {showPassword ? <FaRegEyeSlash /> : <FaRegEye /> }
 
                         </button>
+
+                        <Link to="/forgot_password" className="forgot-password-link">Forgot Password?</Link>
+
 
                     </div> 
 
@@ -117,6 +121,8 @@ function Login() {
                     </button>
 
                 </form>
+
+               
 
             </div>
 
