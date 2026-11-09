@@ -18,7 +18,6 @@ function ForgetPassword(){
         setError("");
 
         if (!email){
-
             setError("Please enter your email address")
             return;
         }

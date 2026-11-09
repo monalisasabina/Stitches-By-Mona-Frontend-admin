@@ -27,7 +27,7 @@ function AdminList(){
                 );
 
                 const data = await response.json();
-                console.log(data)
+                // console.log(data)
                 setAdmins(data)
                
                

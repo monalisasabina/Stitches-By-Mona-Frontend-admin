@@ -6,6 +6,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import RegisterNewAdmin from "../auth/RegisterNewAdmin";
 import AdminList from "../pages/adminList";
 import ForgetPassword from "../auth/ForgetPassword";
+import ResetPassword from "../auth/ResetPassword";
 
 const routes = [
 
@@ -18,7 +19,12 @@ const routes = [
         path: "forgot_password",
         element: <ForgetPassword />
     },
-
+    {
+        path: "reset_password",
+        element: <ResetPassword />
+    },
+    
+    // Protected routes
     {
         element: <ProtectedRoute/>,
         children: [

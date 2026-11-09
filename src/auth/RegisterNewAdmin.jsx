@@ -224,7 +224,6 @@ function RegisterNewAdmin(){
                     <button type="submit"> Sign Up </button>
 
 
-                    
                     {/* DISPLAYING THE NEW ADMIN DETAILS */}
                     {newAdmin && (
 

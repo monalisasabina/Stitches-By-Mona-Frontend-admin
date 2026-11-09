@@ -10,6 +10,7 @@ function NavBar(){
 
           const token = localStorage.getItem('access-token');
 
+          // Logging out
           try{
             const response = await fetch( `${import.meta.env.VITE_STITCHES_API_URL}/auth/admin/logout`,{
                  method: 'POST',
