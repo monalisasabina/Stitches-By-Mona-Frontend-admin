@@ -13,9 +13,12 @@ function ResetPassword(){
     const [showPassword, setShowPassword] = useState(false); 
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     
+    
+    // searchParams
+    const [searchParams] = useSearchParams();
 
     // Token
-    const token = useSearchParams.get("token");
+    const token = searchParams.get("token");
 
     // useNavigate
     const navigate = useNavigate();
@@ -35,16 +38,16 @@ function ResetPassword(){
         }
 
         // password length
-        if(newPassword.lenth <8 ){
-            setError("Password must contain at least 8 characters")
-            return;
-        }
+        // if(newPassword.length <8 ){
+        //     setError("Password must contain at least 8 characters")
+        //     return;
+        // }
 
         // confirming new password
-        if(newPassword !== confirmNewPassword){
-            setError("Password do not match")
-            return;
-        }
+        // if(newPassword !== confirmNewPassword){
+        //     setError("Password do not match")
+        //     return;
+        // }
 
         // Backend response
         try{
@@ -61,7 +64,7 @@ function ResetPassword(){
                     body: JSON.stringify({
                         token: token,
                         new_password: newPassword,
-                        confirm_Password: confirmNewPassword
+                        confirm_password: confirmNewPassword
                     })
                 }
             );
